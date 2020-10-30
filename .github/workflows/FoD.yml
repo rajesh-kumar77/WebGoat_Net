@@ -46,7 +46,7 @@ jobs:
       - name: Setup Nuget.exe
         uses: warrenbuckley/Setup-Nuget@v1
       - name: Restore packages
-        run: nuget restore WebGoat.NET
+        run: nuget restore WebGoat.NET.sln
       - name: Setup MSBuild.exe
         uses: warrenbuckley/Setup-MSBuild@v1
       
