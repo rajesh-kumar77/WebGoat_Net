@@ -54,7 +54,7 @@ jobs:
       - name: Download Fortify ScanCentral Client
         uses: fortify/gha-setup-scancentral-client@v1
       - name: Package Code + Dependencies
-        run: scancentral package -bt msbuild -o package.zip
+        run: scancentral package -bt msbuild -bf WebGoat.Net.sln -o package.zip
         
       
       # Start Fortify on Demand SAST scan and wait until results complete. For more information on FoDUploader commands, see https://github.com/fod-dev/fod-uploader-java
