@@ -15,4 +15,4 @@ jobs:
     - name: Setup MSBuild.exe
       uses: warrenbuckley/Setup-MSBuild@v1
     - name: Build with MSBuild
-      run: msbuild  WebGoat.NET.sln -p:Configuration=Debug
+      run: msbuild  WebGoat.NET -p:Configuration=Debug
