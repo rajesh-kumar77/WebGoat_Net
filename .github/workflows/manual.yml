@@ -18,8 +18,7 @@ jobs:
       run: msbuild  WebGoat.NET.sln -p:Configuration=Debug
     - name: Setup Java
       uses: actions/setup-java@v1
-    - name: Download Fortify ScanCentral Client
-     uses: fortify/gha-setup-scancentral-client@v1
+      uses: fortify/gha-setup-scancentral-client@v1
    - name: Package Code + Dependencies
      run: scancentral package $PACKAGE_OPTS -o package.zip
      env:
