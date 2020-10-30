@@ -16,9 +16,9 @@ jobs:
       uses: warrenbuckley/Setup-MSBuild@v1
     - name: Build with MSBuild
       run: msbuild  WebGoat.NET.sln -p:Configuration=Debug
-# Java 8 required by ScanCentral Client and FoD Uploader (Universal CI Tool)
-      - name: Setup Java
-        uses: actions/setup-java@v1
+      # Java 8 required by ScanCentral Client and FoD Uploader (Universal CI Tool)
+    - name: Setup Java
+      uses: actions/setup-java@v1
         with:
           java-version: 1.8
       
