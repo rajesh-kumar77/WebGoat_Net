@@ -71,7 +71,7 @@ jobs:
         uses: fortify/gha-setup-fod-uploader@v1
       - name: Perform SAST Scan
          run: java -jar "$Env:FOD_UPLOAD_JAR" -z package.zip -aurl "$Env:FOD_API_URL" -purl "$Env:FOD_URL" -rid "$Env:FOD_RELEASE_ID" -tc "$Env:FOD_TENANT" -uc "$Env:FOD_USER" "$Env:FOD_PAT" "$Env:FOD_UPLOADER_OPTS" -n "$Env:FOD_UPLOADER_NOTES"
-	       env:
+	 env:
           FOD_TENANT: ${{ secrets.FOD_TENANT }}  
           FOD_USER: ${{ secrets.FOD_USER }}
           FOD_PAT: ${{ secrets.FOD_PAT }}
