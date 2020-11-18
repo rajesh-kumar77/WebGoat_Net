@@ -34,7 +34,7 @@ jobs:
       - name: Build DotNET
         run: |
            cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin"
-           .\MSBuild.exe $Env:GITHUB_WORKSPACE\WebGoat.Net.sln    
+           .\MSBuild.exe $Env:GITHUB_WORKSPACE\WebGoat.Net.sln
 	# Java 8 required by ScanCentral Client and FoD Uploader(Univeral CI Tool)
       - name: Setup Java
         uses: actions/setup-java@v1 
