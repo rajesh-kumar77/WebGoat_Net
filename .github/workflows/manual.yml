@@ -25,6 +25,9 @@ jobs:
       
     - name: Restore Packages
       run: nuget restore WebGoat.NET.sln
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS=true
+        
 
     - name: Build Solution
       run: |
