@@ -52,12 +52,12 @@ jobs:
       - name: Download Fortify ScanCentral Client
         uses: fortify/gha-setup-scancentral-client@v1
       - name: Package Code + Dependencies
-        run: scancentral package -bt none -bf WebGoat.Net.sln -o $Env:GITHUB_WORKSPACE\WebGoat.Net.sln    
+        run: scancentral package -bt none -bf WebGoat.Net.sln -o $Env:GITHUB_WORKSPACE\package.zip  
         
       
       # Start Fortify on Demand SAST scan. Be sure to set secrets/variables for your desired configuration.
       - name: Perform SAST Scan
-        run: java -jar "$Env:FOD_UPLOAD_JAR" -z package.zip -uc "$Env:FOD_USER" "$Env:FOD_PAT" -rid "$Env:FOD_RELEASE_ID" -purl "$Env:FOD_URL" -aurl "$Env:FOD_API_URL" -tc "$Env:FOD_TENANT"  "$Env:FOD_UPLOADER_OPTS" -n "$Env:FOD_UPLOADER_NOTES"
+        run: java -jar "$Env:FOD_UPLOAD_JAR" -z $Env:GITHUB_WORKSPACE\package.zip  -uc "$Env:FOD_USER" "$Env:FOD_PAT" -rid "$Env:FOD_RELEASE_ID" -purl "$Env:FOD_URL" -aurl "$Env:FOD_API_URL" -tc "$Env:FOD_TENANT"  "$Env:FOD_UPLOADER_OPTS" -n "$Env:FOD_UPLOADER_NOTES"
         env: 
           FOD_TENANT: ${{ secrets.FOD_TENANT }}  
           FOD_USER: ${{ secrets.FOD_USER }}
