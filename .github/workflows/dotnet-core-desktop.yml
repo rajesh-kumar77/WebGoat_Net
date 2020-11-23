@@ -57,8 +57,7 @@ jobs:
       
       # Start Fortify on Demand SAST scan. Be sure to set secrets/variables for your desired configuration.
       - name: Perform SAST Scan
-        run: java -jar "$Env:FOD_UPLOAD_JAR"   -uc "$Env:FOD_USER" "$Env:FOD_PAT" -rid "$Env:FOD_RELEASE_ID" -purl "$Env:FOD_URL" -aurl "$Env:FOD_API_URL" -tc "$Env:FOD_TENANT"  "$Env:FOD_UPLOADER_OPTS" -n "$Env:FOD_UPLOADER_NOTES" -z $Env:GITHUB_WORKSPACE\package.zip
-        env: 
+        run: java -jar "$Env:FOD_UPLOAD_JAR" -z package.zip  -aurl "$Env:FOD_API_URL" -purl "$Env:FOD_URL" -rid "$Env:FOD_RELEASE_ID" -tc "$Env:FOD_TENANT" -uc "$Env:FOD_USER" "$Env:FOD_PAT" "$Env:FOD_UPLOADER_OPTS" -n "$Env:FOD_UPLOADER_NOTES"
           FOD_TENANT: ${{ secrets.FOD_TENANT }}  
           FOD_USER: ${{ secrets.FOD_USER }}
           FOD_PAT: ${{ secrets.FOD_PAT }}
