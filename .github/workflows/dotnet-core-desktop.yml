@@ -52,7 +52,7 @@ jobs:
       - name: Download Fortify ScanCentral Client
         uses: fortify/gha-setup-scancentral-client@v1
       - name: Package Code + Dependencies
-        run: scancentral package -bt msbuild -t:restore -bf $Env:GITHUB_WORKSPACE\WebGoat.Net.sln -o C:\Users\runneradmin\AppData\Local\Fortify\scancentral\package.zip
+        run: scancentral package -bt msbuild /t:restore -bf $Env:GITHUB_WORKSPACE\WebGoat.Net.sln -o C:\Users\runneradmin\AppData\Local\Fortify\scancentral\package.zip
       
       # Start Fortify on Demand SAST scan. Be sure to set secrets/variables for your desired configuration.
       - name: Perform SAST Scan
