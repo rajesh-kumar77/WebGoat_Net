@@ -34,7 +34,7 @@ jobs:
       - name: Build DotNET
         run: |
            cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
-           .\MSBuild.exe $Env:GITHUB_WORKSPACE\WebGoat.Net.sln
+           .\MSBuild.exe C:\Users\mcdowelh.CORPDOM\Desktop\Source-Code\WebGoat.NET-master\WebGoat.Net.sln
      
       
       # Prepare source+dependencies for upload. The default example is for a Maven project that uses pom.xml.
@@ -52,7 +52,7 @@ jobs:
       - name: Download Fortify ScanCentral Client
         uses: fortify/gha-setup-scancentral-client@v1
       - name: Package Code + Dependencies
-        run: scancentral package -bt msbuild /t:restore -bf $Env:GITHUB_WORKSPACE\WebGoat.Net.sln -o C:\Users\runneradmin\AppData\Local\Fortify\scancentral\package.zip
+        run: scancentral package -bt msbuild -bf C:\Users\mcdowelh.CORPDOM\Desktop\Source-Code\WebGoat.NET-master\WebGoat.Net.sln -o C:\Users\runneradmin\AppData\Local\Fortify\scancentral\package.zip
       
       # Start Fortify on Demand SAST scan. Be sure to set secrets/variables for your desired configuration.
       - name: Perform SAST Scan
