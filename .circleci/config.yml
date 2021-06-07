@@ -19,7 +19,7 @@ jobs:
           working_directory: ~/project
           name: Run Build
           command: |
-            msbuild ~/project/WebGoat.NET.sln
+            dotnet ~/project/WebGoat.NET.sln
             
 
 workflows:
