@@ -10,8 +10,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
- 
-- name: BuildParameters.solution
+ - name: BuildParameters.solution
   value: '**\*.sln'
 - name: BuildParameters.ArtifactName
   value: drop
