@@ -13,7 +13,10 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-
+- name: BuildParameters.solution
+  value: '**\*.sln'
+- name: BuildParameters.ArtifactName
+  value: drop
 steps:
 - task: NuGetToolInstaller@1
 
@@ -32,11 +35,6 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-variables:
-- name: BuildParameters.solution
-  value: '**\*.sln'
-- name: BuildParameters.ArtifactName
-  value: drop
 name: $(date:yyyyMMdd)$(rev:.r)
 resources:
   repositories:
