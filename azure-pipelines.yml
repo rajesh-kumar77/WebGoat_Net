@@ -32,3 +32,94 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+variables:
+- name: BuildParameters.solution
+  value: '**\*.sln'
+- name: BuildParameters.ArtifactName
+  value: drop
+name: $(date:yyyyMMdd)$(rev:.r)
+resources:
+  repositories:
+  - repository: self
+    type: git
+    ref: master
+jobs:
+- job: Job_1
+  displayName: Agent job 1
+  pool:
+    vmImage: vs2017-win2016
+  steps:
+  - checkout: self
+  - task: NuGetToolInstaller@0
+    displayName: Use NuGet 4.4.1
+    inputs:
+      versionSpec: 4.4.1
+  - task: NuGetCommand@2
+    displayName: NuGet restore
+    inputs:
+      solution: $(BuildParameters.solution)
+  - task: VSBuild@1
+    displayName: Build solution
+    inputs:
+      solution: $(BuildParameters.solution)
+      msbuildArgs: /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"
+      platform: $(BuildPlatform)
+      configuration: $(BuildConfiguration)
+  - task: VSTest@2
+    displayName: Test Assemblies
+    inputs:
+      testAssemblyVer2: >-
+        **\$(BuildConfiguration)\*test*.dll
+
+        !**\obj\**
+      platform: $(BuildPlatform)
+      configuration: $(BuildConfiguration)
+  - task: PublishSymbols@2
+    displayName: Publish symbols path
+    continueOnError: True
+    inputs:
+      SearchPattern: '**\bin\**\*.pdb'
+      PublishSymbols: false
+      SymbolServerType: TeamServices
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Artifact
+    condition: succeededOrFailed()
+    inputs:
+      PathtoPublish: $(build.artifactstagingdirectory)
+      ArtifactName: $(BuildParameters.ArtifactName)
+      TargetPath: '\\my\share\$(Build.DefinitionName)\$(Build.BuildNumber)'
+  - task: FortifyOnDemandStatic@7
+    displayName: Run Fortify on Demand static assessment on D:\a\1\s\WebGoat\
+    enabled: False
+    inputs:
+      FortifyProjects: D:\a\1\s\WebGoat\
+      ReleaseId: 6955
+      FodConnection: 280559cd-3123-4736-8f03-8d32649c4fab
+      EntitlementPreference: 1
+      InProgressScanActionType: 1
+      RemediationScanPreference: 2
+      PolicyFailAction: 1
+- task: JavaToolInstaller@0
+  inputs:
+    versionSpec: '11'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
+  - task: FortifyScanCentralSAST@7
+    displayName: Fortify ScanCentral SAST Assessment
+    inputs:
+      scanCentralCtrlUrl: https://scsast.protocyberresfh.com/scancentral-ctrl
+      scanCentralClientToken: CHANGEME321!
+      sscUrl: https://ssc.protocyberresfh.com
+      sscCiToken: e5a5df04-3024-48b7-9dce-e64193fefb36
+      uploadToSSC: true
+      applicationName: WebGoat (.NET)
+      applicationVersion: 1.0
+      buildTool: msbuild
+      buildCommand: '**\*.sln /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"'
+      skipBuild: false
+      excludeDisabledProjects: false
+      includeTest: false
+      includeNodeModules: false
+      overwrite: false
+      quiet: false
+...
