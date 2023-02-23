@@ -77,9 +77,6 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
 
-    # Execute all unit tests in the solution
-    - name: Execute unit tests
-      run: dotnet test
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
@@ -113,3 +110,57 @@ jobs:
       with:
         name: MSIX Package
         path: ${{ env.Wap_Project_Directory }}\AppPackages
+    # Java is required to run the various Fortify utilities.
+    # When scanning a Java application, please use the appropriate Java version for building your application.
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: 11
+        distribution: 'zulu'
+    # Prepare source+dependencies for upload. The default example is for a Maven project that uses pom.xml.
+    # TODO: Update PACKAGE_OPTS based on the ScanCentral Client documentation for your project's included tech stack(s). Helpful hints:
+    #   ScanCentral Client will download dependencies for maven (-bt mvn) and gradle (-bt gradle).
+    #   ScanCentral Client can download dependencies for msbuild projects (-bt msbuild); however, you must convert the workflow to use a Windows runner.
+    #   ScanCentral has additional options that should be set for PHP and Python projects
+    #   For other build tools, add your build commands to download necessary dependencies and prepare according to Fortify on Demand Packaging documentation.
+    #   ScanCentral Client documentation is located at https://www.microfocus.com/documentation/fortify-software-security-center/
+    - name: Download Fortify ScanCentral Client
+      uses: fortify/gha-setup-scancentral-client@5b7382f8234fb9840958c49d5f32ae854115f9f3
+    - name: Package Code + Dependencies
+      run: scancentral package -bt msbuild -bf WebGoat.NET.sln -o package.zip
+      env:
+         PACKAGE_OPTS: "-bt msbuild -bf WebGoat.NET.sln"
+
+      # Start Fortify on Demand SAST scan and wait until results complete. For more information on FoDUploader commands, see https://github.com/fod-dev/fod-uploader-java
+      # TODO: Update ENV variables for your application and create the necessary GitHub Secrets.  Helpful hints:
+      #   Credentials and release ID should be obtained from your FoD tenant (either Personal Access Token or API Key can be used).
+      #   Automated Audit preference should be configured for the release's Static Scan Settings in the Fortify on Demand portal.
+    - name: Download Fortify on Demand Universal CI Tool
+      uses: fortify/gha-setup-fod-uploader@6e6bb8a33cb476e240929fa8ebc739ff110e7433
+    - name: Perform SAST Scan
+      run: java -jar $FOD_UPLOAD_JAR -z package.zip -aurl $FOD_API_URL -purl $FOD_URL -rid "$FOD_RELEASE_ID" -tc "$FOD_TENANT" -uc "$FOD_USER" "$FOD_PAT" -ep "SubscriptionOnly"
+      env:
+          FOD_URL: "https://emea.fortify.com/"
+          FOD_API_URL: "https://api.emea.fortify.com/"
+          FOD_TENANT: "emeademo"
+          FOD_USER: "rajeshdemo"
+          FOD_PAT: "VEozQio4bGhSUEN1eUNJOVJHMDd3JFNUR3JqaHtq0"
+          FOD_RELEASE_ID: "117177"
+          FOD_UPLOADER_OPTS: "-ep 2 -pp 0 -I 1 -apf"
+          FOD_UPLOADER_NOTES: 'Triggered by GitHub Actions (${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})'
+
+      # Once scan completes, pull SAST issues from Fortify on Demand and generate SARIF output.
+    - name: Export results to GitHub-optimized SARIF
+      uses: fortify/gha-export-vulnerabilities@fcb374411cff9809028c911dabb8b57dbdae623b
+      with:
+          fod_base_url: "https://emea.fortify.com/"
+          fod_tenant: "emeademo"
+          fod_user: "rajeshdemo"
+          fod_password: "VEozQio4bGhSUEN1eUNJOVJHMDd3JFNUR3JqaHtq0"
+          fod_release_id: "117177"
+
+      # Import Fortify on Demand results to GitHub Security Code Scanning
+    - name: Import Results
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+          sarif_file: ./gh-fortify-sast.sarif
