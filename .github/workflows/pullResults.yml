@@ -15,7 +15,7 @@ jobs:
     steps:
       # Pull SAST issues from Fortify on Demand and generate GitHub-optimized SARIF output
        - name: Export Results
-         uses: fortify/gha-export-vulnerabilities@v1
+         uses: fortify/gha-export-vulnerabilities@v1.0.0
          with:
           export_target: JsonRaw
           fod_base_url: "https://emea.fortify.com/"
