@@ -13,11 +13,13 @@ jobs:
         contents: read
         security-events: write
     steps:
+       - name: Set up Git repository
+         uses: actions/checkout@v2
       # Pull SAST issues from Fortify on Demand and generate GitHub-optimized SARIF output
        - name: Export Results
          uses: fortify/gha-export-vulnerabilities@v1
          with:
-          export_config: ${{ github.workspace }}/MyCustomExportConfig.yml
+          export_config: MyCustomExportConfig.yml
           fod_base_url: "https://emea.fortify.com/"
           fod_tenant: ${{ secrets.FOD_TENANT }}
           fod_user: ${{ secrets.FOD_USER }}
