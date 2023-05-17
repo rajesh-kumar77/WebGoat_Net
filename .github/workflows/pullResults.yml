@@ -19,7 +19,7 @@ jobs:
        - name: Export Results
          uses: fortify/gha-export-vulnerabilities@v1
          with:
-          export_config: MyCustomExportConfig.yml
+          export_target: JsonRaw
           fod_base_url: "https://emea.fortify.com/"
           fod_tenant: ${{ secrets.FOD_TENANT }}
           fod_user: ${{ secrets.FOD_USER }}
@@ -29,4 +29,4 @@ jobs:
          if: always()
          with:
           name: csv-files
-          path: '**/*.csv' 
+          path: '**/*.json' 
