@@ -17,13 +17,12 @@ jobs:
        - name: Export Results
          uses: fortify/gha-export-vulnerabilities@v1
          with:
-          export_target: CSV
+          export_config: /MyCustomExportConfig.yml
           fod_base_url: "https://emea.fortify.com/"
           fod_tenant: ${{ secrets.FOD_TENANT }}
           fod_user: ${{ secrets.FOD_USER }}
           fod_password: ${{ secrets.FOD_PAT }}
           fod_release_id: ${{ secrets.FOD_RELEASE_ID }}
-          export_config: ./MyCustomExportConfig.yml
        - uses: actions/upload-artifact@v2
          if: always()
          with:
