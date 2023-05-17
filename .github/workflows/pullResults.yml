@@ -17,7 +17,7 @@ jobs:
        - name: Export Results
          uses: fortify/gha-export-vulnerabilities@v1.0.0
          with:
-          export_target: CSV
+          export_config: ${WORKSPACE_DIR}/MyCustomExportConfig.xml
           fod_base_url: "https://emea.fortify.com/"
           fod_tenant: ${{ secrets.FOD_TENANT }}
           fod_user: ${{ secrets.FOD_USER }}
