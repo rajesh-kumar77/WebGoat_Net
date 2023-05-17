@@ -17,7 +17,7 @@ jobs:
        - name: Export Results
          uses: fortify/gha-export-vulnerabilities@v1
          with:
-          export_config: /MyCustomExportConfig.yml
+          export_config: ${{ github.workspace }}/MyCustomExportConfig.yml
           fod_base_url: "https://emea.fortify.com/"
           fod_tenant: ${{ secrets.FOD_TENANT }}
           fod_user: ${{ secrets.FOD_USER }}
