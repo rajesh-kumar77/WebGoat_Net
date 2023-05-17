@@ -1,0 +1,16 @@
+csv.config.MyCustomExportConfig:
+  output:
+    mkdir:  true          # Create output directory if it doesn't exist yet
+    stdout: true          # Write CSV output to standard output
+    stderr: false          # Write CSV output to standard error
+    header: true          # Include column headers in CSV output
+    file:   /path/to/output.csv # Write CSV output to given file
+  fields:
+    source: Fortify on Demand
+    scanType: $[vuln.scantype]
+    id: $[vuln.id]
+    issueInstanceId: $[vuln.instanceId]
+    category: $[vuln.category]
+    file: $[vuln.primaryLocationFull]
+    line: $[vuln.lineNumber]
+    cve: $[vuln.cwe]
