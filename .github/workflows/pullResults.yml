@@ -14,10 +14,7 @@ jobs:
         security-events: write
     steps:
        - uses: actions/checkout@v3
-       - run: mkdir -p test
-       - run: echo hello > test/world.txt
-       - run: echo test/world.txt
-      # Pull SAST issues from Fortify on Demand and generate GitHub-optimized SARIF output
+       # Pull SAST issues from Fortify on Demand and generate GitHub-optimized SARIF output
        - name: Export Results
          uses: fortify/gha-export-vulnerabilities@v1.0.0
          with:
