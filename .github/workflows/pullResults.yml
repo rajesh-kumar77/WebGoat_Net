@@ -18,7 +18,7 @@ jobs:
        - name: Export Results
          uses: fortify/gha-export-vulnerabilities@v1.0.0
          with:
-          export_config: ${{github.workspace}}/MyCustomExportConfig_JSON.yml
+          export_config: ${{github.workspace}}/MyCustomExportConfig_CSV.yml
           fod_base_url: "https://emea.fortify.com/"
           fod_tenant: ${{ secrets.FOD_TENANT }}
           fod_user: ${{ secrets.FOD_USER }}
@@ -27,5 +27,5 @@ jobs:
        - uses: actions/upload-artifact@v3
          if: always()
          with:
-          name: json-files
-          path: '**/*.json' 
+          name: csv-files
+          path: '**/*.csv' 
