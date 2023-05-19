@@ -10,19 +10,10 @@ fod:
       - propertyName: staticScanSummary
         uri: /api/v3/scans/{currentStaticScanId}/summary
         embedIf: currentStaticScanId!=null
-  #vulnerability:
-    #embed:                           # Load extra data, depending on what data you want to include in output
-      #- subEntity: all-data
+  vulnerability:
+    embed:                           # Load extra data, depending on what data you want to include in output
+      - subEntity: all-data
 export.dir: ${export.default.dir} # Use default export directory (unless overridden)
 json.raw.output:
   stdout: false                       # Useful for debugging, disable for optimal performance
-  file:   ${export.dir}/${release.applicationName}-${release.releaseName}.json     
-fields:
-    source: Fortify on Demand
-    scanType: $[vuln.scantype]
-    id: $[vuln.id]
-    issueInstanceId: $[vuln.instanceId]
-    category: $[vuln.category]
-    file: $[vuln.primaryLocationFull]
-    line: $[vuln.lineNumber]
-    cwe: $[vuln.cwe]
+  file:   ${export.dir}/${release.applicationName}-${release.releaseName}.json
