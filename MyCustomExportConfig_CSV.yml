@@ -18,3 +18,12 @@ csv:
     stdout: false             # Disabled by default to avoid vulnerability data being exposed through log files
     header: true
     file:   ${export.dir}/${release.applicationName}-${release.releaseName}.csv
+fields:
+    source: Fortify on Demand
+    scanType: $[vuln.scantype]
+    id: $[vuln.id]
+    issueInstanceId: $[vuln.instanceId]
+    category: $[vuln.category]
+    file: $[vuln.primaryLocationFull]
+    line: $[vuln.lineNumber]
+    cwe: $[vuln.cwe]
