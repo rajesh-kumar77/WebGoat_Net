@@ -24,8 +24,13 @@ jobs:
           fod_user: ${{ secrets.FOD_USER }}
           fod_password: ${{ secrets.FOD_PAT }}
           fod_release_id: ${{ secrets.FOD_RELEASE_ID }}
-       - uses: actions/upload-artifact@v3
-         if: always()
+       # Import Fortify SAST results to GitHub Security Code Scanning
+       - name: Import Results
+         uses: github/codeql-action/upload-sarif@v2
          with:
-          name: csv-files
-          path: '**/*.csv' 
+          sarif_file: ./gh-fortify-sast.sarif
+       #- uses: actions/upload-artifact@v3
+         #if: always()
+         #with:
+          #name: csv-files
+          #path: '**/*.csv' 
