@@ -21,7 +21,7 @@ jobs:
           java-version: 17
           distribution: 'zulu'
        - name: Export Results
-         uses: rajesh-kumar77/Raj_FortifyVulnerabilityExporter@v1
+         uses: fortify/gha-export-vulnerabilities@v2.0.2
          with:
           export_config: ${{github.workspace}}/MyCustomExportConfig_JSON.yml
           fod_base_url: "https://emea.fortify.com/"
