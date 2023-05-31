@@ -45,7 +45,7 @@ json.github.sast.format:
       help:
         text: $[#htmlToText(vuln.details?.explanation)+'\n\n'+#htmlToText(vuln.recommendations?.recommendations)+"\n\nFor more information, see "+vuln.deepLink]
       properties:
-        tags: $[vuln.cwe]
+        tags: $[vuln.cwe?.split(",")]
         precision: $[(vuln.severityString matches "(Critical|Medium)") ? "high":"low" ]
         security-severity: $[{Critical:10.0,High:8.9,Medium:6.9,Low:3.9}.get(vuln.severityString)+'']
     result.fields:
