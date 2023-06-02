@@ -1,4 +1,4 @@
-name: Import FoD SAST Results into GitHub Code Scanning Alerts
+name: Import FoD SAST Results (SARIF format) into GitHub Code Scanning Alerts
 on: 
  workflow_dispatch:
  push:
