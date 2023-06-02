@@ -1,0 +1,31 @@
+name: Import FoD SAST Results into GitHub Code Scanning Alerts
+on: 
+ workflow_dispatch:
+ push:
+  tags:
+   - '*'
+      
+jobs:                                                  
+  Export-FoD-To-GitHub:
+    runs-on: ubuntu-latest
+    permissions:
+        actions: read
+        contents: read
+        security-events: write
+    steps:
+       - uses: actions/checkout@v3
+       # Pull SAST issues from Fortify on Demand and generate CSV output
+       - name: Export Results
+         uses: fortify/gha-export-vulnerabilities@v1
+         with:
+          export_config: ${{github.workspace}}/MyCustomExportConfig_JSON.yml
+          fod_base_url: "https://emea.fortify.com/"
+          fod_tenant: ${{ secrets.FOD_TENANT }}
+          fod_user: ${{ secrets.FOD_USER }}
+          fod_password: ${{ secrets.FOD_PAT }}
+          fod_release_id: ${{ secrets.FOD_RELEASE_ID }}
+       - uses: actions/upload-artifact@v3
+         if: always()
+         with:
+          name: json-files
+          path: '**/*.json' 
