@@ -14,12 +14,7 @@ jobs:
         security-events: write
     steps:
        - uses: actions/checkout@v3
-       # Pull SAST issues from Fortify on Demand and generate GitHub-optimized SARIF output
-       - name: Setup Java
-         uses: actions/setup-java@v1     # Required for ScanCentral Client and FoD Uploader
-         with:
-          java-version: 17
-          distribution: 'zulu'
+       # Pull SAST issues from Fortify on Demand and generate CSV output
        - name: Export Results
          uses: fortify/gha-export-vulnerabilities@v1
          with:
