@@ -16,11 +16,16 @@ csv:
     header: true
     file:   ${export.dir}/${release.applicationName}-${release.releaseName}.csv
   fields:
-    source: Fortify on Demand
-    scanType: $[vuln.scantype]
-    id: $[vuln.id]
-    issueInstanceId: $[vuln.instanceId]
-    category: $[vuln.category]
-    file: $[vuln.primaryLocationFull]
-    line: $[vuln.lineNumber]
-    cwe: $[vuln.cwe]
+    Date: $[vuln.introducedDate]
+    Title: $[vuln.category]
+    CweId: $[vuln.cwe]
+    Url: https://api.emea.fortify.com/
+    Severity: $[vuln.severityString]
+    Description: $[vuln.category]
+    Mitigation: 
+    Impact: 
+    References: 
+    Active: $[!vuln.closedStatus]
+    Verified: $[vuln.bugSubmitted]
+    FalsePositive: $[vuln.isSuppressed]
+    Duplicate: false
