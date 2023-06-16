@@ -25,9 +25,5 @@ json.gitlab.sast.output:
 spring.config.activate.on-loader-plugin: fod
 
 json.gitlab.sast.filter.expr: vuln.scantype=='Static'
-json.gitlab.sast.format:
-  fields:
-    schema: https://gitlab.com/gitlab-org/security-products/security-report-schemas/-/raw/v15.0.0/dist/sast-report-format.json
-    version: 15.0.0
-    scan:
+
       
