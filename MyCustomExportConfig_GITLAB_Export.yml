@@ -53,6 +53,7 @@ json.gitlab.sast.format:
     confidence: $[(vuln.severityString matches "(Critical|Medium)") ? "High":"Low" ]
     description: $[#abbreviate(#htmlToText(vuln.details?.summary), 15000)]
     id: $[vuln.vulnId]
+    cwe: $[vuln.cwe?.split(",")]
     cve: 'N/A'
     identifiers: |-
       $[{
