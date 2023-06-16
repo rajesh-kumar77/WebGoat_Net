@@ -1,28 +1,20 @@
+# See FortifyVulnerabilityExporter documentation for FoD connection settings and release selection
+
 export:
   from: fod
-  to: json.gitlab.sast, json.gitlab.dast
+  to: json.gitlab.sast
 
 fod:
-  scopes: view-apps, view-issues, view-reports
   release:
-    embed:                                          # Load static and dynamic scan details if available
-      - propertyName: dynamicScanSummary
-        uri: /api/v3/scans/{currentDynamicScanId}/summary
-        embedIf: currentDynamicScanId!=null
-      - propertyName: siteTree
-        uri: /api/v3/scans/{currentDynamicScanId}/site-tree
-        embedIf: currentDynamicScanId!=null
-        onError: LOG_WARN                           # Site tree may not be available, so we just log a warning
+    embed:                                          # Load static scan summary as required for GitLab output
       - propertyName: staticScanSummary
         uri: /api/v3/scans/{currentStaticScanId}/summary
         embedIf: currentStaticScanId!=null
   vulnerability:
-    filterParam: scantype:Static|Dynamic            # Have FoD return only static and dynamic issues 
-    embed:                                          # Also load details, recommendations and request-response data as required for GitLab output
+    filterParam: scantype:Static                    # Have FoD return only static issues 
+    embed:                                          # Also load details and recommendations as required for GitLab output
       - subEntity: details
       - subEntity: recommendations
-      - subEntity: request-response
-        embedIf:   scantype=='Dynamic'
 
 export.dir: ${CI_PROJECT_DIR:${export.default.dir}} # Unless overridden, use CI_PROJECT_DIR if defined, otherwise default export dir
 json.gitlab.sast.output:
@@ -30,37 +22,6 @@ json.gitlab.sast.output:
   pretty: true                                      # Useful for debugging, disable for optimal performance
   file:   ${export.dir}/gl-fortify-sast.json        # Output file
 
-json.gitlab.dast.output:
-  stdout: false                                     # Disabled by default to avoid vulnerability data being exposed through log files
-  pretty: true                                      # Useful for debugging, disable for optimal performance
-  file:   ${export.dir}/gl-fortify-dast.json        # Output file
-  export:
-  from: fod
-  to: json.gitlab.sast, json.gitlab.dast
-
-fod:
-  scopes: view-apps, view-issues, view-reports
-  release:
-    embed:                                          # Load static and dynamic scan details if available
-      - propertyName: dynamicScanSummary
-        uri: /api/v3/scans/{currentDynamicScanId}/summary
-        embedIf: currentDynamicScanId!=null
-      - propertyName: siteTree
-        uri: /api/v3/scans/{currentDynamicScanId}/site-tree
-        embedIf: currentDynamicScanId!=null
-        onError: LOG_WARN                           # Site tree may not be available, so we just log a warning
-      - propertyName: staticScanSummary
-        uri: /api/v3/scans/{currentStaticScanId}/summary
-        embedIf: currentStaticScanId!=null
-  vulnerability:
-    filterParam: scantype:Static|Dynamic            # Have FoD return only static and dynamic issues 
-    embed:                                          # Also load details, recommendations and request-response data as required for GitLab output
-      - subEntity: details
-      - subEntity: recommendations
-      - subEntity: request-response
-        embedIf:   scantype=='Dynamic'
-
- ---
 spring.config.activate.on-loader-plugin: fod
 
 json.gitlab.sast.filter.expr: vuln.scantype=='Static'
@@ -93,7 +54,7 @@ json.gitlab.sast.format:
     confidence: $[(vuln.severityString matches "(Critical|Medium)") ? "High":"Low" ]
     description: $[#abbreviate(#htmlToText(vuln.details?.summary), 15000)]
     id: $[vuln.vulnId]
-	cwe: $[vuln.cwe?.split(",")]
+    cwe: $[vuln.cwe?.split(",")]
     cve: 'N/A'
     identifiers: |-
       $[{
