@@ -14,7 +14,6 @@ fod:
     embed:                                          # Also load details, recommendations and request-response data as required for GitLab output
       - subEntity: details
       - subEntity: recommendations
-      - subEntity: traces
 
 export.dir: ${CI_PROJECT_DIR:${export.default.dir}} # Unless overridden, use CI_PROJECT_DIR if defined, otherwise default export dir
 json.gitlab.sast.output:
@@ -77,4 +76,4 @@ json.gitlab.sast.format:
       id: FoD-SAST
       name: Fortify on Demand
     severity: $[vuln.severityString]
-    solution: $[#abbreviate(#htmlToText(vuln.details?.explanation)+'\n\n'+#htmlToText(vuln.recommendations?.recommendations), 7000)]
+    solution: ...
