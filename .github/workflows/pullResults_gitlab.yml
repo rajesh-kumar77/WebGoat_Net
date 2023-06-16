@@ -1,4 +1,4 @@
-name: Import FoD SAST Results (GitLab format) into GitHub Code Scanning Alerts
+name: Import FoD SAST Results (GitLab format) into GitLab Code Scanning Alerts
 on: 
  workflow_dispatch:
  push:
@@ -14,7 +14,7 @@ jobs:
         security-events: write
     steps:
        - uses: actions/checkout@v3
-       # Pull SAST issues from Fortify on Demand and generate GitHub-optimized SARIF output
+       # Pull SAST issues from Fortify on Demand and generate GitLab-jaon output
        - name: Export Results
          uses: fortify/gha-export-vulnerabilities@v1
          with:
@@ -24,7 +24,7 @@ jobs:
           fod_user: ${{ secrets.FOD_USER }}
           fod_password: ${{ secrets.FOD_PAT }}
           fod_release_id: ${{ secrets.FOD_RELEASE_ID }}
-       # Import Fortify SAST results to GitHub Security Code Scanning
+       # Import Fortify SAST results to GitLab Security Code Scanning
        - uses: actions/upload-artifact@v3
          if: always()
          with:
