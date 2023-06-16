@@ -23,7 +23,3 @@ json.gitlab.sast.output:
 
 
 spring.config.activate.on-loader-plugin: fod
-
-json.gitlab.sast.filter.expr: vuln.scantype=='Static'
-
-      
