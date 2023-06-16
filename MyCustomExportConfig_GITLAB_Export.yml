@@ -22,4 +22,4 @@ json.gitlab.sast.output:
   file:   ${export.dir}/gl-fortify-sast.json        # Output file
 
 
-spring.config.activate.on-loader-plugin: fod
+
