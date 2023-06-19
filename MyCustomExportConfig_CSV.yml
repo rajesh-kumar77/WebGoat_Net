@@ -18,7 +18,7 @@ csv:
   fields:
     Date: $[vuln.introducedDate]
     Title: $[vuln.category]
-    CweId: $[vuln.cwe]
+    CweId: $[vuln.cwe?.replaceAll("CWE-","")]
     Url: https://api.emea.fortify.com/
     Severity: $[vuln.severityString]
     Description: $[vuln.category]
