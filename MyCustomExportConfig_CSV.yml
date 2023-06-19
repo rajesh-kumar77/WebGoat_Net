@@ -19,10 +19,10 @@ csv:
     Date: $[vuln.introducedDate]
     Title: $[vuln.category]
     CweId: $[vuln.cwe?.replaceAll("CWE-","").substring(0,(vuln.cwe?.replaceAll("CWE-","").indexOf(",")==-1?vuln.cwe?.replaceAll("CWE-","").length():vuln.cwe?.replaceAll("CWE-","").indexOf(",")))]
-    Url: https://api.emea.fortify.com/
-    Severity: $[vuln.severityString]
-    Description: $[vuln.category]
-    Mitigation: 
+    Url: $[vuln.deepLink]
+    Severity: $[(vuln.severityString matches "(Critical|Medium)") ? "High":"Low" ]
+    Description: $[#abbreviate(#htmlToText(vuln.details?.summary), 15000)]
+    Mitigation: $[#abbreviate(#htmlToText(vuln.details?.explanation)+'\n\n'+#htmlToText(vuln.recommendations?.recommendations), 7000)]
     Impact: 
     References: 
     Active: $[!vuln.closedStatus]
