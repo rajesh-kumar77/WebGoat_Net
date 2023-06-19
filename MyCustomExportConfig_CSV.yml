@@ -19,11 +19,11 @@ csv:
     Date: $[vuln.introducedDate]
     Title: $[vuln.category]
     CweId: $[vuln.cwe?.replaceAll("CWE-","").substring(0,(vuln.cwe?.replaceAll("CWE-","").indexOf(",")==-1?vuln.cwe?.replaceAll("CWE-","").length():vuln.cwe?.replaceAll("CWE-","").indexOf(",")))]
-    Url: $[vuln.deepLink]
+    Url: "https://www.microfocus.com/en-us/products/application-security-testing/overview"
     Severity: $[vuln.severityString]
-    Description: $[vuln.details?.summary]
-    Mitigation: $[vuln.details?.explanation]
-    Impact: "https://www.microfocus.com/en-us/products/application-security-testing/overview"
+    Description: $[vuln.details]
+    Mitigation: $[vuln.details]
+    Impact: 
     References: $[vuln.deepLink]
     Active: $[!vuln.closedStatus]
     Verified: $[vuln.bugSubmitted]
