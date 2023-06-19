@@ -20,11 +20,11 @@ csv:
     Title: $[vuln.category]
     CweId: $[vuln.cwe?.replaceAll("CWE-","").substring(0,(vuln.cwe?.replaceAll("CWE-","").indexOf(",")==-1?vuln.cwe?.replaceAll("CWE-","").length():vuln.cwe?.replaceAll("CWE-","").indexOf(",")))]
     Url: $[vuln.deepLink]
-    Severity: $[(vuln.severityString matches "(Critical|Medium)") ? "High":"Low" ]
-    Description: $[#abbreviate(#htmlToText(vuln.details?.summary), 15000)]
-    Mitigation: $[#abbreviate(#htmlToText(vuln.details?.explanation)+'\n\n'+#htmlToText(vuln.recommendations?.recommendations), 7000)]
-    Impact: 
-    References: 
+    Severity: $[vuln.severityString]
+    Description: $[vuln.details?.summary]
+    Mitigation: $[vuln.details?.explanation)]
+    Impact: "https://www.microfocus.com/en-us/products/application-security-testing/overview"
+    References: $[vuln.deepLink]
     Active: $[!vuln.closedStatus]
     Verified: $[vuln.bugSubmitted]
     FalsePositive: $[vuln.isSuppressed]
