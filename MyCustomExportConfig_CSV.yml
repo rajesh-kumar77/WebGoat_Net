@@ -18,7 +18,7 @@ csv:
   fields:
     Date: $[vuln.introducedDate]
     Title: $[vuln.category]
-    CweId: $[vuln.cwe?.replaceAll("CWE-","").substring(0,(vuln.cwe?.replaceAll("CWE-","").indexOf(",")==-1?vuln.cwe?.replaceAll("CWE-","").length():vuln.cwe?.replaceAll("CWE-","").indexOf(","))]
+    CweId: $[vuln.cwe?.replaceAll("CWE-","").substring(0,(vuln.cwe?.replaceAll("CWE-","").indexOf(",")==-1?vuln.cwe?.replaceAll("CWE-","").length():vuln.cwe?.replaceAll("CWE-","").indexOf(",")))]
     Url: https://api.emea.fortify.com/
     Severity: $[vuln.severityString]
     Description: $[vuln.category]
