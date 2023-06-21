@@ -61,9 +61,7 @@ json.gitlab.sast.format:
             name:  "Instance id: "+vuln.instanceId,
             url:   vuln.deepLink,
             type:  "issueInstanceId",
-            value: vuln.instanceId,
-            id: vuln.vulnId,
-            cwe: vuln.cwe?.replaceAll("CWE-","")
+            value: vuln.instanceId
           }
       }]
     location:
@@ -78,4 +76,4 @@ json.gitlab.sast.format:
       id: FoD-SAST
       name: Fortify on Demand
     severity: $[vuln.severityString]
-    solution: $[#abbreviate(#htmlToText(vuln.details?.explanation)+'\n\n'+#htmlToText(vuln.recommendations?.recommendations), 7000)]
+    solution: $[#abbreviate(#htmlToText(vuln.details?.explanation)+'\n\n Id:'+#htmlToText(vuln.vulnId)+'\n\n CWE:'+#htmlToText(vuln.cwe?.replaceAll("CWE-",""))+'\n\n'+#htmlToText(vuln.recommendations?.recommendations), 7000)]
