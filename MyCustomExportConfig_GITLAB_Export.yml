@@ -61,7 +61,9 @@ json.gitlab.sast.format:
             name:  "Instance id: "+vuln.instanceId,
             url:   vuln.deepLink,
             type:  "issueInstanceId",
-            value: vuln.instanceId
+            value: vuln.instanceId,
+            id: vuln.vulnId,
+            cwe: vuln.cwe?.replaceAll("CWE-","")
           }
       }]
     location:
