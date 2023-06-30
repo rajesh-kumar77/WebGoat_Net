@@ -22,10 +22,10 @@ csv:
     CweId: $[vuln.cwe?.replaceAll("CWE-","").substring(0,(vuln.cwe?.replaceAll("CWE-","").indexOf(",")==-1?vuln.cwe?.replaceAll("CWE-","").length():vuln.cwe?.replaceAll("CWE-","").indexOf(",")))]
     Url: "https://www.microfocus.com/en-us/products/application-security-testing/overview"
     Severity: $[vuln.severityString]
-    Description: $[#abbreviate(#htmlToText(vuln.details?.summary), 15000)]
-    Mitigation: $[#htmlToText(vuln.details?.summary)]
+    Description: $[#abbreviate('Scanner: Fortify on Demand\n\n'+#htmlToText(vuln.category)+'\n\n'+#htmlToText(vuln.details?.summary), 15000)]
+    Mitigation: $[#abbreviate(#htmlToText(vuln.details?.explanation)+'\n\n'+#htmlToText(vuln.recommendations?.recommendations), 7000)]
     Impact: 
-    References: $[vuln.deepLink]
+    References: $[#abbreviate('Identifier type: issueInstanceId\n\nName: Instance id: '+#htmlToText(vuln.instanceId)+'\n\nValue: '+#htmlToText(vuln.instanceId)+'\n\nURL: '+#htmlToText(vuln.deepLink), 7000)]
     Active: $[!vuln.closedStatus]
     Verified: $[vuln.bugSubmitted]
     FalsePositive: $[vuln.isSuppressed]
