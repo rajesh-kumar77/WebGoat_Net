@@ -4,10 +4,10 @@ export:
   from: fod
   to: csv
 
-#fod:
-#  vulnerability:
-    # embed:                  # Load extra data, depending on what data you want to include in output
-    #   - subEntity: details
+fod:
+  vulnerability:
+     embed:                  # Load extra data, depending on what data you want to include in output
+       - subEntity: details
 
 export.dir: ${export.default.dir} # Use default export directory (unless overridden)
 
@@ -22,8 +22,8 @@ csv:
     CweId: $[vuln.cwe?.replaceAll("CWE-","").substring(0,(vuln.cwe?.replaceAll("CWE-","").indexOf(",")==-1?vuln.cwe?.replaceAll("CWE-","").length():vuln.cwe?.replaceAll("CWE-","").indexOf(",")))]
     Url: "https://www.microfocus.com/en-us/products/application-security-testing/overview"
     Severity: $[vuln.severityString]
-    Description: $[vuln.details.summary]
-    Mitigation: $[vuln.details]
+    Description: $[#abbreviate(#htmlToText(vuln.details?.summary), 15000)]
+    Mitigation: $[#htmlToText(vuln.details?.summary)]
     Impact: 
     References: $[vuln.deepLink]
     Active: $[!vuln.closedStatus]
