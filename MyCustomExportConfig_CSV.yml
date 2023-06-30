@@ -10,7 +10,7 @@ export:
     #   - subEntity: details
 
 export.dir: ${export.default.dir} # Use default export directory (unless overridden)
-spring.config.activate.on-loader-plugin: fod
+
 csv:
   output:
     stdout: false             # Disabled by default to avoid vulnerability data being exposed through log files
@@ -30,3 +30,7 @@ csv:
     Verified: $[vuln.bugSubmitted]
     FalsePositive: $[vuln.isSuppressed]
     Duplicate: false
+
+    spring.config.activate.on-loader-plugin: fod
+
+
