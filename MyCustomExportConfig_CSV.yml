@@ -8,6 +8,7 @@ fod:
   vulnerability:
      embed:                  # Load extra data, depending on what data you want to include in output
        - subEntity: details
+       - subEntity: recommendations
 
 export.dir: ${export.default.dir} # Use default export directory (unless overridden)
 
@@ -22,7 +23,7 @@ csv:
     CweId: $[vuln.cwe?.replaceAll("CWE-","").substring(0,(vuln.cwe?.replaceAll("CWE-","").indexOf(",")==-1?vuln.cwe?.replaceAll("CWE-","").length():vuln.cwe?.replaceAll("CWE-","").indexOf(",")))]
     Url: "https://www.microfocus.com/en-us/products/application-security-testing/overview"
     Severity: $[vuln.severityString]
-    Description: $[#htmlToText(vuln.details?.summary)]
+    Description: $[#htmlToText("--"+vuln.details?.summary)]
     Mitigation: $[#htmlToText(vuln.recommendations?.recommendations)]
     Impact: 
     References: $[#htmlToText(vuln.deepLink)]
