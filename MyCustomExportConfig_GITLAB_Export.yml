@@ -53,7 +53,7 @@ json.gitlab.sast.format:
     confidence: $[(vuln.severityString matches "(Critical|Medium)") ? "High":"Low" ]
     description: $[#abbreviate(#htmlToText(vuln.details?.summary), 15000)]
     id: $[vuln.id]
-    cwe: $[vuln.cwe?.replaceAll("CWE-","")]
+    cwe: $[vuln.cwe?.replaceAll("CWE-","").substring(0,(vuln.cwe?.replaceAll("CWE-","").indexOf(",")==-1?vuln.cwe?.replaceAll("CWE-","").length():vuln.cwe?.replaceAll("CWE-","").indexOf(",")))]
     cve: 'N/A'
     identifiers: |-
       $[{
@@ -76,4 +76,4 @@ json.gitlab.sast.format:
       id: FoD-SAST
       name: Fortify on Demand
     severity: $[vuln.severityString]
-    solution: $[#abbreviate(#htmlToText(vuln.details?.explanation)+'\n\n Id:'+#htmlToText(vuln.id)+'\n\n CWE:'+#htmlToText(vuln.cwe?.replaceAll("CWE-",""))+'\n\n'+#htmlToText(vuln.recommendations?.recommendations), 7000)]
+    solution: $[#abbreviate(#htmlToText(vuln.details?.explanation)+'\n\n Id:'+#htmlToText(vuln.id)+'\n\n CWE:'+#htmlToText(vuln.cwe?.replaceAll("CWE-","").substring(0,(vuln.cwe?.replaceAll("CWE-","").indexOf(",")==-1?vuln.cwe?.replaceAll("CWE-","").length():vuln.cwe?.replaceAll("CWE-","").indexOf(","))))+'\n\n'+#htmlToText(vuln.recommendations?.recommendations), 7000)]
