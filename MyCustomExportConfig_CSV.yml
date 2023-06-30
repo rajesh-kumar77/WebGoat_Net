@@ -10,6 +10,7 @@ export:
     #   - subEntity: details
 
 export.dir: ${export.default.dir} # Use default export directory (unless overridden)
+spring.config.activate.on-loader-plugin: fod
 csv:
   output:
     stdout: false             # Disabled by default to avoid vulnerability data being exposed through log files
@@ -21,8 +22,7 @@ csv:
     CweId: $[vuln.cwe?.replaceAll("CWE-","").substring(0,(vuln.cwe?.replaceAll("CWE-","").indexOf(",")==-1?vuln.cwe?.replaceAll("CWE-","").length():vuln.cwe?.replaceAll("CWE-","").indexOf(",")))]
     Url: "https://www.microfocus.com/en-us/products/application-security-testing/overview"
     Severity: $[vuln.severityString]
-    Description: $[vulnerabilityMappers.vulnerability.get()]
-    vulnerabilityMappers.vulnerability.value: $[vuln]
+    Description: $[#abbreviate(#htmlToText(vuln.details?.summary), 15000)]
     Mitigation: $[vuln.details]
     Impact: 
     References: $[vuln.deepLink]
