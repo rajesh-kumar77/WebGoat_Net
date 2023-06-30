@@ -22,6 +22,7 @@ csv:
     Url: "https://www.microfocus.com/en-us/products/application-security-testing/overview"
     Severity: $[vuln.severityString]
     Description: $[vulnerabilityMappers.vulnerability.get()]
+    vulnerabilityMappers.vulnerability.value: $[vuln]
     Mitigation: $[vuln.details]
     Impact: 
     References: $[vuln.deepLink]
