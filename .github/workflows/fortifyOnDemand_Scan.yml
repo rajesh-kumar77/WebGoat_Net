@@ -72,4 +72,22 @@ jobs:
         run: scancentral package -bt msbuild -o package.zip
       - name: Show package contents
         run: unzip -v package.zip
-     
+
+   
+      # Start Fortify on Demand SAST scan and wait until results complete. For more information on FoDUploader commands, see https://github.com/fod-dev/fod-uploader-java
+      # TODO: Update ENV variables for your application and create the necessary GitHub Secrets.  Helpful hints:
+      #   Credentials and release ID should be obtained from your FoD tenant (either Personal Access Token or API Key can be used).
+      #   Automated Audit preference should be configured for the release's Static Scan Settings in the Fortify on Demand portal.
+      - name: Download Fortify on Demand Universal CI Tool
+        uses: fortify/gha-setup-fod-uploader@v1
+      - name: Perform SAST Scan
+        run: java -jar ${env:FOD_UPLOAD_JAR} -z package.zip -aurl ${env:FOD_API_URL} -purl ${env:FOD_URL} -rid "${env:FOD_RELEASE_ID}" -tc "${env:FOD_TENANT}" -uc "${env:FOD_USER}" "${env:FOD_PAT}" -ep 2 -pp 0 -n "${env:FOD_UPLOADER_NOTES}"
+        env:
+          FOD_TENANT: ${{ secrets.FOD_TENANT }}  
+          FOD_USER: ${{ secrets.FOD_USER }}
+          FOD_PAT: ${{ secrets.FOD_PAT }}
+          FOD_RELEASE_ID: ${{ secrets.FOD_RELEASE_ID }}
+          FOD_URL: "https://emea.fortify.com/"
+          FOD_API_URL: "https://api.emea.fortify.com/"
+          FOD_UPLOADER_OPTS: "-ep 2 -pp 0"
+          FOD_UPLOADER_NOTES: 'Triggered by GitHub Actions (${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})'     
