@@ -69,7 +69,7 @@ jobs:
       - name: Download Fortify ScanCentral Client
         uses: fortify/gha-setup-scancentral-client@v2.3.0
       - name: Package Code + Dependencies
-        run: scancentral package -bt msbuild -bc "/t:rebuild /p:RestoreLockedMode=true" -bf WebGoat.NET.sln -o package.zip
+        run: scancentral package -bt msbuild -bc "/p:RestoreLockedMode=true" -bf WebGoat.NET.sln -o package.zip
       - name: Show package contents
         run: unzip -v package.zip
 
