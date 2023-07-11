@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-  </PropertyGroup>
-  <PropertyGroup>
     <GenerateFullPaths>True</GenerateFullPaths>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -20,6 +17,12 @@
     <OldToolsVersion>4.0</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -839,6 +842,11 @@
     <Compile Include="AddNewUser.aspx.designer.cs">
       <DependentUpon>AddNewUser.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="WebGoatCoins\Autocomplete.ashx.cs">
       <DependentUpon>Autocomplete.ashx</DependentUpon>
     </Compile>
@@ -1039,6 +1047,13 @@
     <None Include="Downloads\csrf.pdf" />
     <None Include="Downloads\transport_layer.pdf" />
     <None Include="Downloads\architecture.pdf" />
+    <Content Include="libman.json" />
+    <Content Include="packages.lock.json" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="TODO.txt" />
     <None Include="DB_Scripts\create_webgoatcoins.sql" />
     <None Include="DB_Scripts\load_webgoatcoins.sql" />
@@ -1060,4 +1075,10 @@
     <None Include="DB_Scripts\create_webgoatcoins_sqlite3.sql" />
   </ItemGroup>
   <ItemGroup />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net451\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net451\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+  </Target>
 </Project>
