@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "dependencies": {
+    ".NETFramework,Version=v4.5.2": {
+      "BouncyCastle": {
+        "type": "Direct",
+        "requested": "[1.8.5, 1.8.5]",
+        "resolved": "1.8.5",
+        "contentHash": "196QWfvglefGd/Cr2C4hIdmA9HYkLFZovxJ7L0BAOFlNn+qlmVxqpxpcKGoC5AF4rOuoUq3ylzLgKZW5j4nmDQ=="
+      },
+      "EntityFramework": {
+        "type": "Direct",
+        "requested": "[6.1.3, 6.1.3]",
+        "resolved": "6.1.3",
+        "contentHash": "2xzFHAF3VVdmTR3//MygtQpwfbDjeaq+nQwCcokLzen7MKHOojPaxNPQPa4diHY1QtcR7zlHAJHNRqPB7W2Syw=="
+      },
+      "Google.Protobuf": {
+        "type": "Direct",
+        "requested": "[3.19.4, 3.19.4]",
+        "resolved": "3.19.4",
+        "contentHash": "fd07/ykL4O4FhqrZIELm5lmiyOHfdPg9+o+hWr6tcfRdS7tHXnImg/2wtogLzlW2eEmr0J7j6ZrZvaWOLiJbxQ=="
+      },
+      "K4os.Compression.LZ4": {
+        "type": "Direct",
+        "requested": "[1.2.13, 1.2.13]",
+        "resolved": "1.2.13",
+        "contentHash": "x0gxxUXvFoexiDQJDab5DhzOvnl1CN9tePmPmYGor8s0/Nna5KRXULyifaXYmrk/b3doBYT72owoAff3JzSi4w=="
+      },
+      "K4os.Compression.LZ4.Streams": {
+        "type": "Direct",
+        "requested": "[1.2.12, 1.2.12]",
+        "resolved": "1.2.12",
+        "contentHash": "FJl2lnlXFmgdsvmBkfDI3lUjW/HdZzIqVOBi2M4nRo8aTQ3MeDBaLm4caqiVIUTBwtlds8R8Y0snD0ClQuOz6g=="
+      },
+      "K4os.Hash.xxHash": {
+        "type": "Direct",
+        "requested": "[1.0.6, 1.0.6]",
+        "resolved": "1.0.6",
+        "contentHash": "jCfNP0inx1sGcP3KSbpiDEH3km2e1sVBjMfKo+V92jr1dL4ZYgA1uhRMl1wAtdGZcbObXIikKqtVlgx3j/CW6g=="
+      },
+      "log4net": {
+        "type": "Direct",
+        "requested": "[1.2.10, 1.2.10]",
+        "resolved": "1.2.10",
+        "contentHash": "yP7PCpxPt5cB9yiRAvCwyW5YRqXV4jM4tpVLnm/ls2nJt786l5srbSdm5xIEVMXz/kOYqLKP177Gyqey1wdP/A=="
+      },
+      "Mono.Data.Sqlite": {
+        "type": "Direct",
+        "requested": "[1.0.61, 1.0.61]",
+        "resolved": "1.0.61",
+        "contentHash": "o5bYhnYDlQ8qiDBDJEnnK/LlQnHzpAb6ixXdrZKcVGv26jBfSm58ujAR1NLBhs0h+R5782VufbaF6gzYq3iiaA=="
+      },
+      "MySql.Data": {
+        "type": "Direct",
+        "requested": "[8.0.26, 8.0.26]",
+        "resolved": "8.0.26",
+        "contentHash": "iOxE24dI01JZlZ1EObkz9WwYMzX+0RnBf5a11OkPDCOGv2Yo0tTWmwAJfVXkuuSD47XngOir7l7+xZZ56lZyAA=="
+      },
+      "MySql.Data.EntityFramework": {
+        "type": "Direct",
+        "requested": "[8.0.11, 8.0.11]",
+        "resolved": "8.0.11",
+        "contentHash": "vZMQ8rDdSiGaIwrTNf6Dc0TapPhD7hT80R63yMpfLbu/m1G1Dn2MnLjrZqG9gVX7IoA37eDCHeCJGmWBNezJkQ=="
+      },
+      "Portable.BouncyCastle": {
+        "type": "Direct",
+        "requested": "[1.7.0, 1.7.0]",
+        "resolved": "1.7.0",
+        "contentHash": "Odm5ofSUi8+vwUf0PrJIggOJgQLOwBgkOxxEIq+nr8sCSZY6NH6Yy7q0zPRE/scR0KRkr9yo0Cnnr9sRlTp35w=="
+      },
+      "SSH.NET": {
+        "type": "Direct",
+        "requested": "[2011.7.29, 2011.7.29]",
+        "resolved": "2011.7.29",
+        "contentHash": "y7y5cjXfUaHNxoFqrOVN0SEZacjSmiFz8KQyQ8KIgyadvk4ipWzQ/b0fAIxF7HYJdxqtaT1QfWqsS4L/F8kgMQ=="
+      },
+      "Stub.System.Data.SQLite.Core.NetFramework": {
+        "type": "Direct",
+        "requested": "[1.0.115.5, 1.0.115.5]",
+        "resolved": "1.0.115.5",
+        "contentHash": "fXkWBM+Dstt1JEItGsVyOJvY+UrnPaT7NCrWGyGuAxzF7ceKNsDBTjR1yrPOwUrQ/V9R6moHdB2FiO0+j94m6g=="
+      },
+      "System.Buffers": {
+        "type": "Direct",
+        "requested": "[4.5.1, 4.5.1]",
+        "resolved": "4.5.1",
+        "contentHash": "Rw7ijyl1qqRS0YQD/WycNst8hUUMgrMH4FCn1nNm27M4VxchZ1js3fVjQaANHO5f3sN4isvP4a+Met9Y4YomAg=="
+      },
+      "System.Data.SQLite": {
+        "type": "Direct",
+        "requested": "[1.0.108, 1.0.108]",
+        "resolved": "1.0.108",
+        "contentHash": "QIh+GB+erDrvVIbEpEfVRF1U9fJOwmZCRyAPISDwmt8xn3vilM2xjEjr6hQBTI4a2uPxsn6cihT9BJwXAnM8eQ=="
+      },
+      "System.Data.SQLite.Core": {
+        "type": "Direct",
+        "requested": "[1.0.115.5, 1.0.115.5]",
+        "resolved": "1.0.115.5",
+        "contentHash": "vADIqqgpxaC5xR6qOV8/KMZkQeSDCfmmWpVOtQx0oEr3Yjq2XdTxX7+jfE4+oO2xPovAbYiz6Q5cLRbSsDkq6Q=="
+      },
+      "System.Data.SQLite.EF6": {
+        "type": "Direct",
+        "requested": "[1.0.108, 1.0.108]",
+        "resolved": "1.0.108",
+        "contentHash": "JVyfjN3Uv7Qizm0cqsD8UKSgAGUMjFBl3RClyjRayA8uJhp05v4XrLKHoj5uNgKoFiueTRMKeiLbYI0LtMwlSQ=="
+      },
+      "System.Data.SQLite.Linq": {
+        "type": "Direct",
+        "requested": "[1.0.115.5, 1.0.115.5]",
+        "resolved": "1.0.115.5",
+        "contentHash": "DI1HiF4vbhvFzDJS9fzNbVVT9em4o0ejyScjyyzxAoS8Toh1H/Fm2hg92h3Su2D5vPqeAKt9A1nlyUEWEpRfoA=="
+      },
+      "System.Memory": {
+        "type": "Direct",
+        "requested": "[4.5.4, 4.5.4]",
+        "resolved": "4.5.4",
+        "contentHash": "1MbJTHS1lZ4bS4FmsJjnuGJOu88ZzTT2rLvrhW7Ygic+pC0NWA+3hgAen0HRdsocuQXCkUTdFn9yHJJhsijDXw=="
+      },
+      "System.Runtime.CompilerServices.Unsafe": {
+        "type": "Direct",
+        "requested": "[4.5.3, 4.5.3]",
+        "resolved": "4.5.3",
+        "contentHash": "3TIsJhD1EiiT0w2CcDMN/iSSwnNnsrnbzeVHSKkaEgV85txMprmuO+Yq2AdSbeVGcg28pdNDTPK87tJhX7VFHw=="
+      }
+    }
+  }
+}
