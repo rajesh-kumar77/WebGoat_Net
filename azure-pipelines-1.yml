@@ -1,0 +1,47 @@
+# ASP.NET
+# Build and test ASP.NET projects.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
+
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+
+- task: FortifyOnDemandStatic@8
+  inputs:
+    FortifyProjects: '$(Build.ArtifactStagingDirectory)'
+    FodConnection: 'demo'
+    ReleaseOptions: '0'
+    ReleaseId: 136418
+    EntitlementSelection: '1'
+    EntitlementPreference: '0'
+    OverrideScanSettings: '1'
+    InProgressScanActionType: '2'
+    RemediationScanPreference: '0'
+    BuildType: 'msbuild'
+    LanguageLevelDotNet: '33'
+    BuildCommand: '/t:Restore /p:RestoreLockedMode=true'
+    BuildFile: 'C:\agents\_work\1\s\WebGoat.NET.sln'
+    PolicyFailAction: '0'
